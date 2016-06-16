@@ -1,0 +1,67 @@
+#1.1. Binary Form Conversion
+x = float(raw_input('Enter a decimal number between 0 and 1: '))
+
+#Looking for value of p s.t. 2p * x is a whole number
+p = 0
+while ((2**p)*x)% 1 != 0:
+    print('Remainder = ' + str((2**p)*x - int((2**p)*x)))
+    p += 1
+
+num = int(x*(2**p))
+
+result = ''
+if num == 0:
+    result = '0'
+while num > 0:
+    result = str(num%2) + result
+    num = num/2
+
+for i in range(p - len(result)):
+    result = '0' + result
+
+result = result[0:-p] + '.' + result[-p:]
+print('The binary representation of the decimal ' + str(x) + ' is ' + str(result))
+
+
+#1.2. Bisection Search 
+#1.2.1. Simple case
+epsilon = 0.01
+x = 24.0
+numGuesses = 0
+low = 0.0
+high = x
+ans = (high + low)/2.0
+
+while abs(ans**2 - x) >= epsilon:
+   numGuesses += 1
+    if ans**2 < x:
+        low = ans
+    else:
+        high = ans
+    ans = (high + low)/2.0
+
+#1.2.2. NEWTON-RAPHSON
+epsilon = 0.01
+x = 24.0	
+guess = y / 2.0
+while abs(guess * guess - x) >= epsilon: 
+	guess = guess - (((guess**2) - x) / (2 * guess))
+
+#1.2.3. Using Functions 
+def findRoot3(x, power, epsilon):
+    if x < 0 and power%2 == 0:
+        return None
+    # can't find even powered root of negative number
+    low = min(-1.0, x)
+    high = max(1.0, x)
+    ans = (high+low)/2.0
+
+    while abs(ans**power - x) > epsilon:
+        if ans**power < x:
+            low = ans
+        else:
+            high = ans
+        ans = (high+low)/2.0
+
+    return ans
+    
