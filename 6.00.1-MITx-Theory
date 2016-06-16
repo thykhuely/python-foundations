@@ -65,3 +65,14 @@ def findRoot3(x, power, epsilon):
 
     return ans
     
+#2. Practice #1
+import math
+def polysum(n, s):
+    ''' 
+    A polygon with n sides, each side has length s
+    Return the sum of the area and square of the perimeter of 
+    the polygon, rounded to 4 decimal places)
+    '''
+    area = (0.25*n*(s**2)) / (math.tan(math.pi/n))
+    sq_perimeter = (n*s)**2
+    return round(area + sq_perimeter,4)
